@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <link rel="icon" href="/fav.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APX | Official Channel Website</title>
+    <meta name="description" content="Official website for APX YouTube Channel. Gaming, Tech, and High-Energy Content.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Custom Config & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#FF2E2E',
+                            dark: '#050505',
+                            card: '#121212',
+                            text: '#E4E4E7',
+                            accent: '#FF4D4D'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Orbitron', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'grid-move': 'gridMove 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gridMove: {
+                            '0%': { backgroundPosition: '0 0' },
+                            '100%': { backgroundPosition: '50px 50px' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF2E2E;
+        }
+
+        /* Moving Cyber Grid Background */
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(255, 46, 46, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 46, 46, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        /* Glitch Effect Helper */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #FF2E2E;
+            text-shadow: 2px 2px #0000ff;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Animation Utility Classes */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal Styles */
+        .modal-backdrop {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: scale(0.9);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-backdrop.active .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<link rel="icon" href="/fav.ico" type="image/x-icon">
+<body class="bg-brand-dark text-brand-text font-body selection:bg-brand-red selection:text-white overflow-x-hidden relative">
+
+    <!-- Global Background Elements -->
+    <div class="fixed inset-0 z-0 pointer-events-none cyber-grid opacity-30"></div>
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 bg-gradient-to-b from-brand-dark/0 via-brand-dark/80 to-brand-dark"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-brand-dark/80 backdrop-blur-xl border-b border-white/5 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 group cursor-pointer">
+                    <a href="#home" class="text-2xl sm:text-3xl font-display font-black tracking-wider text-white group-hover:text-brand-red transition-colors duration-300">
+                        APX<span class="text-brand-red group-hover:text-white transition-colors duration-300">.</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-gray-300 hover:text-brand-red transition-all duration-300 px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wider hover:bg-white/5">Home</a>
+                        <a href="#videos" class="text-gray-300 hover:text-brand-red transition-all duration-300 px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wider hover:bg-white/5">Content</a>
+                        <a href="#about" class="text-gray-300 hover:text-brand-red transition-all duration-300 px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wider hover:bg-white/5">About</a>
+                        <a href="#community" class="text-gray-300 hover:text-brand-red transition-all duration-300 px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wider hover:bg-white/5">Squad</a>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="https://www.youtube.com/@APX_yt?sub_confirmation=1" target="_blank" 
+                       class="relative inline-flex group items-center justify-center px-6 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-red-600 active:shadow-none shadow-lg bg-gradient-to-tr from-brand-red to-red-500 border-red-700 text-white overflow-hidden rounded-lg font-display font-bold hover:scale-105 transition-transform">
+                        <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                        <span class="relative flex items-center gap-2">
+                             <i class="fab fa-youtube"></i> Subscribe
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none transition-colors">
+                        <i id="menu-icon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-brand-card/95 backdrop-blur-xl border-b border-white/10" id="mobile-menu">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-4 rounded-md text-base font-bold text-white hover:bg-white/5 hover:text-brand-red transition-all">Home</a>
+                <a href="#videos" onclick="toggleMobileMenu()" class="block px-3 py-4 rounded-md text-base font-bold text-white hover:bg-white/5 hover:text-brand-red transition-all">Videos</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-4 rounded-md text-base font-bold text-white hover:bg-white/5 hover:text-brand-red transition-all">About</a>
+                <a href="https://www.youtube.com/@APX_yt" target="_blank" class="block mt-4 text-center px-3 py-4 rounded-lg bg-brand-red text-white font-bold shadow-lg">Subscribe Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden">
+        <!-- Dynamic Glows -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] aspect-square bg-brand-red/10 rounded-full blur-[80px] sm:blur-[120px] animate-pulse-slow"></div>
+        <div class="absolute top-0 right-0 w-[50%] aspect-square bg-blue-600/10 rounded-full blur-[100px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="reveal-on-scroll">
+                <span class="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-brand-red text-xs sm:text-sm font-mono tracking-widest mb-6 backdrop-blur-sm">
+                    ● ONLINE
+                </span>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-display font-black text-white mb-6 tracking-tighter leading-tight sm:leading-tight">
+                    WELCOME TO<br>
+                    <span class="relative inline-block">
+                        <span class="absolute -inset-2 bg-brand-red/20 blur-xl"></span>
+                        <span class="relative text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-red-500 to-orange-500 glitch-hover cursor-default">APX</span>
+                    </span>
+                </h1>
+                <p class="mt-4 sm:mt-6 max-w-2xl mx-auto text-base sm:text-xl md:text-2xl text-gray-400 font-light leading-relaxed px-2">
+                    The intersection of <span class="text-white font-semibold">Gaming</span>, <span class="text-white font-semibold">Tech</span>, and <span class="text-white font-semibold">Storytelling</span>. 
+                    <br class="hidden md:block">Experience the next evolution of digital content. APX Formally known as <span class="text-white font-semibold">ApexGamerTV</span> 
+                </p>
+                
+                <div class="mt-8 sm:mt-12 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 px-4">
+                    <button onclick="document.getElementById('videos').scrollIntoView({behavior: 'smooth'})"
+                       class="group bg-white text-brand-dark px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transform hover:-translate-y-1">
+                        <i class="fab fa-youtube text-brand-red text-2xl group-hover:scale-110 transition-transform"></i> 
+                        Watch Latest
+                    </button>
+                    <a href="#community" 
+                       class="group border border-white/20 bg-white/5 hover:bg-brand-red hover:border-brand-red hover:text-white px-8 py-4 rounded-xl font-bold text-lg transition-all backdrop-blur-md flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                        <i class="fas fa-users text-gray-400 group-hover:text-white transition-colors"></i>
+                        Join Community
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="mt-16 sm:mt-24 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 border-t border-white/10 pt-12 reveal-on-scroll delay-200">
+                <div class="text-center group hover:bg-white/5 p-4 rounded-xl transition-colors">
+                    <div class="text-2xl sm:text-4xl font-display font-bold text-white group-hover:text-brand-red transition-colors">100%</div>
+                    <div class="text-[10px] sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-bold">Unfiltered</div>
+                </div>
+                <div class="text-center group hover:bg-white/5 p-4 rounded-xl transition-colors">
+                    <div class="text-2xl sm:text-4xl font-display font-bold text-white group-hover:text-brand-red transition-colors">4K</div>
+                    <div class="text-[10px] sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-bold">Resolution</div>
+                </div>
+                <div class="text-center group hover:bg-white/5 p-4 rounded-xl transition-colors">
+                    <div class="text-2xl sm:text-4xl font-display font-bold text-white group-hover:text-brand-red transition-colors">INF</div>
+                    <div class="text-[10px] sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-bold">Possibilities</div>
+                </div>
+                <div class="text-center group hover:bg-white/5 p-4 rounded-xl transition-colors">
+                    <div class="text-2xl sm:text-4xl font-display font-bold text-white group-hover:text-brand-red transition-colors">HUB</div>
+                    <div class="text-[10px] sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-bold">Global</div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce hidden md:block opacity-50">
+                <i class="fas fa-chevron-down text-white text-xl"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Videos Section -->
+    <section id="videos" class="py-16 sm:py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 reveal-on-scroll">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white">Latest <span class="text-brand-red relative">
+                        Uploads
+                        <svg class="absolute w-full h-2 sm:h-3 -bottom-1 left-0 text-brand-red opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                            <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="3" fill="none" />
+                        </svg>
+                    </span></h2>
+                    <p class="text-gray-400 mt-2 sm:mt-4 text-sm sm:text-lg">Click to watch directly on APX World.</p>
+                </div>
+                <a href="https://www.youtube.com/@APX_yt/videos" target="_blank" class="inline-flex items-center text-brand-red hover:text-white transition-colors font-bold uppercase tracking-wide group text-xs sm:text-sm">
+                    View All Content <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                
+                <!-- Video Card 1 -->
+                <div onclick="openVideo('7TOrX0k0bXk')" class="reveal-on-scroll group bg-brand-card rounded-2xl overflow-hidden border border-white/5 hover:border-brand-red/50 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(255,46,46,0.2)] sm:hover:-translate-y-3 cursor-pointer">
+                    <div class="relative aspect-video bg-gray-800 overflow-hidden">
+                        <img src="https://img.youtube.com/vi/7TOrX0k0bXk/maxresdefault.jpg" alt="Video Thumbnail" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent opacity-90"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 bg-brand-red rounded-full flex items-center justify-center shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                                <i class="fas fa-play text-white ml-1 text-sm sm:text-base"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur px-2 py-1 text-[10px] sm:text-xs rounded font-mono border border-white/10">12:30</div>
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <div class="flex items-center gap-2 mb-2 sm:mb-3">
+                            <span class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></span>
+                            <span class="text-[10px] sm:text-xs text-brand-red font-bold uppercase tracking-wider">Gameplay</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 line-clamp-2 group-hover:text-brand-red transition-colors">Action-Packed Moments & Highlights</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm line-clamp-2">Click to watch the high-intensity gameplay showcase right here.</p>
+                    </div>
+                </div>
+
+                <!-- Video Card 2 -->
+                <div onclick="openVideo('s7wmiS2mYEs')" class="reveal-on-scroll group bg-brand-card rounded-2xl overflow-hidden border border-white/5 hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.2)] sm:hover:-translate-y-3 cursor-pointer" style="transition-delay: 100ms;">
+                    <div class="relative aspect-video bg-gray-800 overflow-hidden">
+                        <img src="https://img.youtube.com/vi/s7wmiS2mYEs/maxresdefault.jpg" alt="Video Thumbnail" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent opacity-90"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                                <i class="fas fa-play text-white ml-1 text-sm sm:text-base"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur px-2 py-1 text-[10px] sm:text-xs rounded font-mono border border-white/10">08:15</div>
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <div class="flex items-center gap-2 mb-2 sm:mb-3">
+                            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                            <span class="text-[10px] sm:text-xs text-blue-500 font-bold uppercase tracking-wider">Tech Review</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 line-clamp-2 group-hover:text-blue-500 transition-colors">The Future of Tech is Here</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm line-clamp-2">A deep dive into the latest coding and technology trends.</p>
+                    </div>
+                </div>
+
+                <!-- Video Card 3 -->
+                <div onclick="openVideo('h9WovMBbaYM')" class="reveal-on-scroll group bg-brand-card rounded-2xl overflow-hidden border border-white/5 hover:border-green-500/50 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(34,197,94,0.2)] sm:hover:-translate-y-3 cursor-pointer" style="transition-delay: 200ms;">
+                    <div class="relative aspect-video bg-gray-800 overflow-hidden">
+                        <img src="https://img.youtube.com/vi/h9WovMBbaYM/maxresdefault.jpg" alt="Video Thumbnail" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent opacity-90"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 bg-green-600 rounded-full flex items-center justify-center shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                                <i class="fas fa-play text-white ml-1 text-sm sm:text-base"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur px-2 py-1 text-[10px] sm:text-xs rounded font-mono border border-white/10">Doc</div>
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <div class="flex items-center gap-2 mb-2 sm:mb-3">
+                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                            <span class="text-[10px] sm:text-xs text-green-500 font-bold uppercase tracking-wider">Documentary</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 line-clamp-2 group-hover:text-green-500 transition-colors">APX Series: Power & Precision</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm line-clamp-2">A closer look at the tools and stories behind the brand.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 sm:py-24 relative overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="reveal-on-scroll relative bg-gradient-to-br from-brand-card to-black border border-white/10 rounded-2xl sm:rounded-[40px] p-6 sm:p-12 lg:p-20 overflow-hidden shadow-2xl">
+                <!-- Background Decoration -->
+                <div class="absolute top-0 right-0 w-64 sm:w-96 aspect-square bg-brand-red/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                
+                <div class="flex flex-col lg:flex-row items-center gap-10 sm:gap-16 relative z-10">
+                    <!-- Profile Identity (Updated with Icon) -->
+                    <div class="flex-shrink-0 relative group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-red to-orange-600 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 animate-pulse-slow"></div>
+                        <div class="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-72 lg:h-72 bg-black rounded-full border-4 border-brand-dark ring-2 ring-white/10 flex items-center justify-center overflow-hidden transform group-hover:scale-105 transition-transform duration-500">
+                             <!-- Your Channel Icon Integration -->
+                             <img src="icon.png" alt="APX Icon" class="w-full h-full object-cover" onerror="this.innerHTML='<i class=\'fas fa-user text-6xl text-brand-red/50\'></i>'; this.style.backgroundColor='#111';">
+                        </div>
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-brand-red text-white px-5 py-2 rounded-full font-bold text-[10px] sm:text-xs uppercase tracking-wider shadow-lg whitespace-nowrap">
+                            Content Creator
+                        </div>
+                    </div>
+                    
+                    <div class="text-center lg:text-left flex-1">
+                        <h2 class="text-3xl sm:text-5xl font-display font-bold text-white mb-6">Who is <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-orange-500">APX</span>?</h2>
+                        <p class="text-gray-300 text-base sm:text-lg lg:text-xl leading-relaxed mb-8">
+                            APX is not just a channel; it's a digital ecosystem dedicated to high-performance gaming, cutting-edge technology, and compelling documentary-style narratives. 
+                            <br><br>
+                            We break down the complexities of the tech world and deliver adrenaline-pumping gameplay, all wrapped in cinema-grade production quality.
+                        </p>
+                        
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
+                            <div class="bg-white/5 backdrop-blur px-4 py-2 sm:px-5 sm:py-3 rounded-xl border border-white/10 flex items-center gap-2 sm:gap-3 hover:bg-white/10 transition-colors cursor-default">
+                                <i class="fas fa-bolt text-yellow-400 text-sm sm:text-base"></i> <span class="font-semibold text-white text-xs sm:text-sm">High Energy</span>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur px-4 py-2 sm:px-5 sm:py-3 rounded-xl border border-white/10 flex items-center gap-2 sm:gap-3 hover:bg-white/10 transition-colors cursor-default">
+                                <i class="fas fa-video text-brand-red text-sm sm:text-base"></i> <span class="font-semibold text-white text-xs sm:text-sm">4K Production</span>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur px-4 py-2 sm:px-5 sm:py-3 rounded-xl border border-white/10 flex items-center gap-2 sm:gap-3 hover:bg-white/10 transition-colors cursor-default">
+                                <i class="fas fa-globe text-blue-400 text-sm sm:text-base"></i> <span class="font-semibold text-white text-xs sm:text-sm">Global Hub</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join The Squad -->
+    <section id="community" class="py-16 sm:py-24 bg-brand-dark relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 reveal-on-scroll">
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-display font-bold text-white mb-4">Join the <span class="text-brand-red">Squad</span></h2>
+                <p class="text-gray-400 text-sm sm:text-lg max-w-2xl mx-auto">Connect with us on our primary platforms. Be part of the conversation.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                <!-- YouTube Card -->
+                <a href="https://www.youtube.com/@APX_yt?sub_confirmation=1" target="_blank" class="reveal-on-scroll group relative overflow-hidden bg-[#FF0000]/5 hover:bg-[#FF0000] p-8 sm:p-10 rounded-2xl sm:rounded-3xl transition-all duration-500 border border-[#FF0000]/20 hover:shadow-[0_0_50px_rgba(255,0,0,0.4)]">
+                    <div class="absolute -right-6 sm:-right-10 -top-6 sm:-top-10 text-[#FF0000]/10 group-hover:text-white/20 text-7xl sm:text-9xl transition-colors duration-500">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center md:items-start text-center md:text-left">
+                        <i class="fab fa-youtube text-5xl sm:text-6xl text-[#FF0000] group-hover:text-white mb-6 transition-colors duration-500"></i>
+                        <h3 class="text-white font-bold text-2xl sm:text-3xl mb-2">YouTube</h3>
+                        <p class="text-gray-400 group-hover:text-white/90 text-sm sm:text-lg mb-6">The hub for all videos, streams, and shorts.</p>
+                        <span class="inline-block bg-[#FF0000]/20 group-hover:bg-white group-hover:text-[#FF0000] text-[#FF0000] px-6 py-2 rounded-full font-bold uppercase tracking-wider text-xs sm:text-sm transition-all duration-300">Subscribe</span>
+                    </div>
+                </a>
+
+                <!-- Discord Card -->
+                <a href="https://discord.gg/eGwP2GuTVM" target="_blank" class="reveal-on-scroll group relative overflow-hidden bg-[#5865F2]/5 hover:bg-[#5865F2] p-8 sm:p-10 rounded-2xl sm:rounded-3xl transition-all duration-500 border border-[#5865F2]/20 hover:shadow-[0_0_50px_rgba(88,101,242,0.4)]" style="transition-delay: 200ms;">
+                    <div class="absolute -right-6 sm:-right-10 -top-6 sm:-top-10 text-[#5865F2]/10 group-hover:text-white/20 text-7xl sm:text-9xl transition-colors duration-500">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center md:items-start text-center md:text-left">
+                        <i class="fab fa-discord text-5xl sm:text-6xl text-[#5865F2] group-hover:text-white mb-6 transition-colors duration-500"></i>
+                        <h3 class="text-white font-bold text-2xl sm:text-3xl mb-2">Discord</h3>
+                        <p class="text-gray-400 group-hover:text-white/90 text-sm sm:text-lg mb-6">Live chat, voice rooms, and community events.</p>
+                        <span class="inline-block bg-[#5865F2]/20 group-hover:bg-white group-hover:text-[#5865F2] text-[#5865F2] px-6 py-2 rounded-full font-bold uppercase tracking-wider text-xs sm:text-sm transition-all duration-300">Join Server</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-white/10 pt-16 sm:pt-20 pb-10 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 text-center md:text-left">
+                <div class="mb-8 md:mb-0">
+                    <span class="text-2xl sm:text-3xl font-display font-black tracking-wider text-white block">APX<span class="text-brand-red">.</span></span>
+                    <p class="text-gray-500 text-xs sm:text-sm mt-3 max-w-xs mx-auto md:mx-0 leading-relaxed">Creating the future of content, one frame at a time.</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-8">
+                    <button onclick="openModal('privacy')" class="text-gray-400 hover:text-white transition-colors text-[10px] sm:text-sm uppercase tracking-wide font-medium">Privacy Policy</button>
+                    <button onclick="openModal('terms')" class="text-gray-400 hover:text-white transition-colors text-[10px] sm:text-sm uppercase tracking-wide font-medium">Terms</button>
+                    <button onclick="openModal('contact')" class="px-5 py-2 rounded-full border border-white/20 text-white hover:bg-brand-red hover:border-brand-red transition-all text-[10px] sm:text-sm font-bold uppercase">Contact</button>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center flex flex-col items-center">
+                <p class="text-gray-600 text-[10px] sm:text-sm mb-4 tracking-wide">&copy; 2026 APX CHANNEL. ALL RIGHTS RESERVED.</p>
+                <div class="flex space-x-6">
+                     <a href="https://www.youtube.com/@APX_yt" target="_blank" class="text-gray-500 hover:text-brand-red transition-colors text-lg"><i class="fab fa-youtube"></i></a>
+                     <a href="#" class="text-gray-500 hover:text-brand-red transition-colors text-lg"><i class="fas fa-envelope"></i></a>
+                     <a href="https://discord.gg/eGwP2GuTVM" target="_blank" class="text-gray-500 hover:text-brand-red transition-colors text-lg"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 z-[70] bg-black/95 backdrop-blur-xl hidden flex items-center justify-center p-2 sm:p-4 opacity-0 transition-opacity duration-300">
+        <div class="relative w-full max-w-5xl aspect-video bg-black rounded-lg sm:rounded-2xl overflow-hidden shadow-2xl border border-white/10 transform scale-95 transition-transform duration-300" id="videoModalContent">
+            <button onclick="closeVideo()" class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 bg-black/50 hover:bg-brand-red text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all">
+                <i class="fas fa-times text-sm sm:text-base"></i>
+            </button>
+            <iframe id="videoFrame" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="absolute inset-0 z-0" onclick="closeVideo()"></div>
+    </div>
+
+    <!-- Text Modal -->
+    <div id="modalBackdrop" class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm modal-backdrop hidden items-center justify-center p-4">
+        <div id="modalContent" class="bg-brand-card border border-white/10 rounded-2xl w-full max-w-2xl shadow-2xl modal-content overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-4 sm:p-6 border-b border-white/10 flex justify-between items-center bg-white/5">
+                <h3 id="modalTitle" class="text-lg sm:text-2xl font-display font-bold text-white uppercase">Title</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-brand-red transition-colors w-8 h-8 flex items-center justify-center rounded-full">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="p-6 sm:p-8 overflow-y-auto text-gray-300 text-sm sm:text-base leading-relaxed"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- Mobile Menu Toggle ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            const isHidden = menu.classList.contains('hidden');
+            
+            if(isHidden) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // --- Video Modal ---
+        function openVideo(videoId) {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            const content = document.getElementById('videoModalContent');
+            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            const content = document.getElementById('videoModalContent');
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                frame.src = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // --- Scroll Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('is-visible');
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+        // --- Text Modal ---
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+
+        const modalData = {
+            privacy: { title: 'Privacy Policy', body: '<p>APX respect your privacy. No personal data is harvested or stored by this site directly. We only use essential analytics.</p>' },
+            terms: { title: 'Terms', body: '<p>All visual content, logo designs, and branding for APX are copyright-protected. High-energy behavior required.</p>' },
+            contact: { title: 'Contact Us', body: '<div class="space-y-4"><p>Reach out for collaborations:</p><p class="text-brand-red font-bold">Email: contact@apxworld.tv</p><p class="text-blue-400 font-bold">Discord: discord.gg/eGwP2GuTVM</p></div>' }
+        };
+
+        function openModal(type) {
+            const data = modalData[type];
+            modalTitle.textContent = data.title;
+            modalBody.innerHTML = data.body;
+            modalBackdrop.classList.remove('hidden');
+            modalBackdrop.classList.add('flex');
+            setTimeout(() => { modalBackdrop.classList.add('active'); }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalBackdrop.classList.remove('active');
+            setTimeout(() => { 
+                modalBackdrop.classList.add('hidden'); 
+                modalBackdrop.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') { closeVideo(); closeModal(); }
+        });
+    </script>
+</body>
+</html>
